@@ -1,0 +1,11 @@
+# IDE files
+.idea
+
+# Web API files
+WebApi/Properties
+WebApi/obj
+
+WebApi/appsettings.*
+
+# Solution files
+*.sln
