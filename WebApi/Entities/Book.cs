@@ -10,7 +10,7 @@ namespace WebApi.Entities
         
         public string Title { get; set; }
         public int GenreId { get; set; }
-        // Genre object will be added
+        public Genre Genre { get; set; }
         public int AuthorId { get; set; }
         // Author object will be added
         public int PageCount { get; set; }
