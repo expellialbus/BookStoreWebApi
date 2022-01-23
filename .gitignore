@@ -4,6 +4,7 @@
 # Web API files
 WebApi/Properties
 WebApi/obj
+WebApi/bin
 
 WebApi/appsettings.*
 
