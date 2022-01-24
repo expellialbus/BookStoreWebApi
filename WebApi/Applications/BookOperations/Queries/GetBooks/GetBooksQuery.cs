@@ -19,11 +19,13 @@ namespace WebApi.Applications.BookOperations.Queries.GetBooks
 
         public List<BookViewModel> Handle()
         {
+            // Gets all books from Books table in the database
             var books = _context.Books
                 .Include(book => book.Author)
                 .Include(book => book.Genre)
                 .OrderBy(book => book.Id).ToList();
 
+            // Automatically maps Book objects to BookViewModel object and returns
             return _mapper.Map<List<BookViewModel>>(books);
         }
     }

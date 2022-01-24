@@ -21,6 +21,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            // Creates an instance of GetBooksQuery class and returns all books to the client
+            // Returns 200 OK with list of books if there is any data in the books table
             GetBooksQuery query = new GetBooksQuery(_context, _mapper);
 
             var result = query.Handle();

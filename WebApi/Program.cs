@@ -16,7 +16,8 @@ namespace WebApi
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
+            
+            // Adds example data to the database when program executed
             using (var scope = host.Services.CreateScope())
             {
                 DataGenerator.Initialize(scope.ServiceProvider);

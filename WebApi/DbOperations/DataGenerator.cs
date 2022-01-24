@@ -10,9 +10,13 @@ namespace WebApi.DbOperations
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            // Gets options for BookStoreDbContext class
+            // and creates an instance of it to add example data to the database
             var options = serviceProvider.GetRequiredService<DbContextOptions<BookStoreDbContext>>();
             var context = new BookStoreDbContext(options);
 
+            // If there is any data in the Books table of database
+            // method adds nothing to the database
             if (context.Books.Any())
             {
                 return;
@@ -80,7 +84,8 @@ namespace WebApi.DbOperations
                     BirthDate = new DateTime(1986, 02, 11)
                 }
             );
-
+            
+            // Saves changes to the database
             context.SaveChanges();
         }
     }
