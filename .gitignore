@@ -8,5 +8,9 @@ WebApi/bin
 
 WebApi/appsettings.*
 
+# Test files
+Tests/WebApi/UnitTests/obj
+Tests/WebApi/UnitTests/bin
+
 # Solution files
 *.sln
