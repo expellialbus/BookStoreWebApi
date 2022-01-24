@@ -8,22 +8,18 @@ namespace WebApi.Common
     {
         public MappingProfile()
         {
-            BookMaps();
+            Book();
         }
-
+        
         // Maps Book objects to BookViewModel according to specified rules
-        private void BookMaps()
+        private void Book()
         {
-            // Maps Genre.Name to Genre property of BookViewModel
-            CreateMap<Book, BookViewModel>().ForMember(model => model.Genre,
-                options => options.MapFrom(book => book.Genre.Name));
-
-            // Maps Author.Name and Author.Surname to Author property of BookViewModel
-            CreateMap<Book, BookViewModel>().ForMember(model => model.Author,
-                options => options.MapFrom(book => book.Author.Name + " " + book.Author.Surname));
-
-            // Maps Book.PublishDate to PublishDate property of BookViewModel as string
-            CreateMap<Book, BookViewModel>().ForMember(model => model.PublishDate,
+            CreateMap<Book, BookViewModel>()
+                .ForMember(model => model.Genre, // Maps Genre.Name to Genre property of BookViewModel
+                options => options.MapFrom(book => book.Genre.Name))
+                .ForMember(model => model.Author, // Maps Author.Name and Author.Surname to Author property of BookViewModel
+                options => options.MapFrom(book => book.Author.Name + " " + book.Author.Surname))
+                .ForMember(model => model.PublishDate, // Maps Book.PublishDate to PublishDate property of BookViewModel as string
                 options => options.MapFrom(book => book.PublishDate.ToString("dd/MM/yyyy")));
         }
     }
