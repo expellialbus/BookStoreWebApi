@@ -14,3 +14,4 @@ Tests/WebApi/UnitTests/bin
 
 # Solution files
 *.sln
+*.user
