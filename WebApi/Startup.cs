@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WebApi.DbOperations;
+using WebApi.Middlewares;
 using WebApi.Services;
 
 namespace WebApi
@@ -62,7 +63,13 @@ namespace WebApi
             app.UseRouting();
 
             app.UseAuthorization();
-
+    
+            // Adds CustomExceptionMiddleware to the pipeline 
+            // just before the endpoints middleware
+            // in this way all exceptions thrown from endpoints
+            // will be caught in the CustomExceptionMiddleWare
+            app.UseCustomException(); 
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
