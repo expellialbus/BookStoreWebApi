@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WebApi.DbOperations;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -40,6 +41,10 @@ namespace WebApi
             
             // Adds AutoMapper to the services container
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            
+            // Adds a ILoggerService to the container and returns a ConsoleLogger object 
+            // It just creates one instance of ConsoleLogger at the beginning of runtime and sends it when requested
+            services.AddSingleton<ILoggerService, ConsoleLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
