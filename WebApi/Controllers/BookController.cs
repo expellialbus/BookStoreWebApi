@@ -41,15 +41,15 @@ namespace WebApi.Controllers
             // Returns 200 OK if there is the specified book in the books table
             GetBookDetailQuery query = new GetBookDetailQuery(_context, _mapper);
             GetBookDetailQueryValidator validator = new GetBookDetailQueryValidator();
-            
+
             query.BookId = id;
-            
+
             // Tries to validate GetBookDetailQuery class properties
             // according to rules provided in GetBookDetailQueryValidator class constructor
             // If properties are not consistent with the rules 
             // an error will be thrown
-            validator.ValidateAndThrow(query);  
-            
+            validator.ValidateAndThrow(query);
+
             var result = query.Handle();
 
             return Ok(result);
@@ -57,13 +57,19 @@ namespace WebApi.Controllers
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-        {   
+        {
             // Creates and instance of DeleteBookCommand and deletes book specified by id 
             // Returns 200 OK if there is the specified book in the books table
             DeleteBookCommand command = new DeleteBookCommand(_context);
+            DeleteBookCommandValidator validator = new DeleteBookCommandValidator();
 
             command.BookId = id;
-            
+
+            // Tries to validate DeleteBookCommand class properties
+            // according to rules provided in DeleteBookCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             command.Handle();
 
             return Ok();
