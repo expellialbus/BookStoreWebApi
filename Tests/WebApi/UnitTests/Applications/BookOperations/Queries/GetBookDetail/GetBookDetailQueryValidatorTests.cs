@@ -1,9 +1,5 @@
-using AutoMapper;
 using FluentAssertions;
-using FluentValidation;
-using UnitTests.TestSetup;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
-using WebApi.DbOperations;
 using Xunit;
 
 namespace UnitTests.Applications.BookOperations.Queries.GetBookDetail
