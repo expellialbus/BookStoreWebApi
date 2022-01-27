@@ -34,7 +34,7 @@ namespace UnitTests.Applications.BookOperations.Queries.GetBookDetail
         public void WhenInvalidIdIsGiven_InvalidOperationException_ShouldBeThrown()
         {
             GetBookDetailQuery query = new GetBookDetailQuery(_context, _mapper);
-            query.BookId = 5;
+            query.BookId = 5; // there is no such book with id 5 in the provided database
 
             FluentActions
                 .Invoking(() => query.Handle())
