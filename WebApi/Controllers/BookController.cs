@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
@@ -37,8 +38,16 @@ namespace WebApi.Controllers
             // Creates and instance of GetBookDetailQuery and returns book specified by id 
             // Return 200 OK if there is the specified book in the database
             GetBookDetailQuery query = new GetBookDetailQuery(_context, _mapper);
+            GetBookDetailQueryValidator validator = new GetBookDetailQueryValidator();
+            
             query.BookId = id;
-
+            
+            // Tries to validate GetBookDetailQuery class properties
+            // according to rules provided in GetBookDetailQueryValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(query);  
+            
             var result = query.Handle();
 
             return Ok(result);
