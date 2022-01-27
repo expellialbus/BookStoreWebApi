@@ -1,6 +1,8 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApi.Applications.BookOperations.Commands.DeleteBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
 using WebApi.DbOperations;
@@ -23,8 +25,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            // Creates an instance of GetBooksQuery class and returns all books to the client
-            // Returns 200 OK with list of books if there is any data in the books table
+            // Creates an instance of GetBooksQuery class and returns all books
+            // Returns 200 OK if there is any data in the books table
             GetBooksQuery query = new GetBooksQuery(_context, _mapper);
 
             var result = query.Handle();
@@ -36,7 +38,7 @@ namespace WebApi.Controllers
         public IActionResult GetById(int id)
         {
             // Creates and instance of GetBookDetailQuery and returns book specified by id 
-            // Return 200 OK if there is the specified book in the database
+            // Returns 200 OK if there is the specified book in the books table
             GetBookDetailQuery query = new GetBookDetailQuery(_context, _mapper);
             GetBookDetailQueryValidator validator = new GetBookDetailQueryValidator();
             
@@ -51,6 +53,20 @@ namespace WebApi.Controllers
             var result = query.Handle();
 
             return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {   
+            // Creates and instance of DeleteBookCommand and deletes book specified by id 
+            // Returns 200 OK if there is the specified book in the books table
+            DeleteBookCommand command = new DeleteBookCommand(_context);
+
+            command.BookId = id;
+            
+            command.Handle();
+
+            return Ok();
         }
     }
 }

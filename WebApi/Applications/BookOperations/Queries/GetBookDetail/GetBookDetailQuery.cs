@@ -29,10 +29,8 @@ namespace WebApi.Applications.BookOperations.Queries.GetBookDetail
 
             // Throws error if there is no such book
             if (book is null)
-            {
                 throw new InvalidOperationException("No such book.!");
-            }
-            
+
             // Automatically maps Book object to BookDetailViewModel object and returns
             return _mapper.Map<BookDetailViewModel>(book);
         }
