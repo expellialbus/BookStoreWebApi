@@ -1,4 +1,5 @@
 using AutoMapper;
+using WebApi.Applications.BookOperations.Commands.CreateBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
 using WebApi.Entities;
@@ -30,6 +31,8 @@ namespace WebApi.Common
                     options => options.MapFrom(book => book.Author.Name + " " + book.Author.Surname))
                 .ForMember(model => model.PublishDate, // Maps Book.PublishDate to PublishDate property of BookDetailViewModel as string
                     options => options.MapFrom(book => book.PublishDate.ToString("dd/MM/yyyy")));
+
+            CreateMap<CreateBookDtoModel, Book>();
         }
     }
 }
