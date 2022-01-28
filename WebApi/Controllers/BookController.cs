@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Applications.BookOperations.Commands.CreateBook;
 using WebApi.Applications.BookOperations.Commands.DeleteBook;
+using WebApi.Applications.BookOperations.Commands.UpdateBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
 using WebApi.DbOperations;
@@ -73,6 +74,21 @@ namespace WebApi.Controllers
             validator.ValidateAndThrow(command);
             command.Handle();
             
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] UpdateBookDtoModel model, int id)
+        {
+            // Creates and instance of UpdateBookCommand and updates the book specified by id 
+            // Returns 200 OK if there is the specified book in the books table
+            UpdateBookCommand command = new UpdateBookCommand(_context);
+
+            command.BookId = id;
+            command.Model = model;
+            
+            command.Handle();
+
             return Ok();
         }
         
