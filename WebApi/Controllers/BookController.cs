@@ -83,10 +83,16 @@ namespace WebApi.Controllers
             // Creates and instance of UpdateBookCommand and updates the book specified by id 
             // Returns 200 OK if there is the specified book in the books table
             UpdateBookCommand command = new UpdateBookCommand(_context);
-
+            UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
+            
             command.BookId = id;
             command.Model = model;
             
+            // Tries to validate UpdateeBookCommand class properties
+            // according to rules provided in UpdateBookCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             command.Handle();
 
             return Ok();
