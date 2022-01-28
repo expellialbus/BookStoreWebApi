@@ -10,6 +10,8 @@ namespace UnitTests.Applications.BookOperations.Commands.CreateBook
         [Fact]
         public void WhenValidInputsAreGiven_Validator_ShouldNotReturnError()
         {
+            // Since this function tests the validator 
+            // the command object's property won't be used
             CreateBookCommand command = new CreateBookCommand(null, null);
             CreateBookCommandValidator validator = new CreateBookCommandValidator();
 
@@ -41,6 +43,8 @@ namespace UnitTests.Applications.BookOperations.Commands.CreateBook
         public void WhenInvalidInputsAreGiven_Validator_ShouldReturnError(string title, int genreId, int authorId,
             int pageCount)
         {
+            // Since this function tests the validator 
+            // the command object's property won't be used
             CreateBookCommand command = new CreateBookCommand(null, null);
             CreateBookCommandValidator validator = new CreateBookCommandValidator();
 
@@ -66,6 +70,8 @@ namespace UnitTests.Applications.BookOperations.Commands.CreateBook
         [Fact]
         public void WhenInvalidDateIsGiven_Validator_ShouldReturnError()
         {
+            // Since this function tests the validator 
+            // the command object's property won't be used
             CreateBookCommand command = new CreateBookCommand(null, null);
             CreateBookCommandValidator validator = new CreateBookCommandValidator();
 
