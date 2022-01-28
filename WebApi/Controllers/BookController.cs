@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Applications.BookOperations.Commands.CreateBook;
 using WebApi.Applications.BookOperations.Commands.DeleteBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
             _context = context;
             _mapper = mapper;
         }
-
+        
         [HttpGet]
         public IActionResult Get()
         {
@@ -55,6 +56,20 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateBookDtoModel model)
+        {
+            // Creates and instance of CreateBookCommand and adds new book to the database
+            // Returns 200 OK if the book is successfully added to the database
+            CreateBookCommand command = new CreateBookCommand(_context, _mapper);
+
+            command.Model = model;
+            
+            command.Handle();
+            
+            return Ok();
+        }
+        
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
