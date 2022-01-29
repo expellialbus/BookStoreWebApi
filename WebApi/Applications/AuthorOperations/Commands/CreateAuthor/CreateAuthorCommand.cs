@@ -23,7 +23,7 @@ namespace WebApi.Applications.AuthorOperations.Commands.CreateAuthor
         {
             // Checks if there is already an author with provided name and surname in the database
             var author = _context.Authors
-                .FirstOrDefault(author => author.Name == Model.Name && author.Surname == Model.Surname);
+                .SingleOrDefault(author => author.Name == Model.Name && author.Surname == Model.Surname);
 
             // An exception will be thrown if there is
             if (author is not null)
