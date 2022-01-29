@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Applications.AuthorOperations.Commands.CreateAuthor;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
 using WebApi.DbOperations;
@@ -51,6 +52,20 @@ namespace WebApi.Controllers
             var result = query.Handle();
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateAuthorDtoModel model)
+        {
+            // Creates an instance of CreateAuthorCommand class and returns author specified by id
+            // Returns 200 OK if the author successfully added to the database
+            CreateAuthorCommand command = new CreateAuthorCommand(_context, _mapper);
+
+            command.Model = model;
+            
+            command.Handle();
+
+            return Ok();
         }
     }
 }
