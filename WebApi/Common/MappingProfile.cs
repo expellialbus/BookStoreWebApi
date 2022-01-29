@@ -1,4 +1,5 @@
 using AutoMapper;
+using WebApi.Applications.AuthorOperations.Commands.CreateAuthor;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
 using WebApi.Applications.BookOperations.Commands.CreateBook;
@@ -48,6 +49,8 @@ namespace WebApi.Common
             CreateMap<Author, AuthorDetailViewModel>()
                 .ForMember(model => model.BirthDate, // Maps Author.BirthDate to BirthDate property of AuthorDetailViewModel
                     options => options.MapFrom(author => author.BirthDate.ToString("dd/MM/yyyy")));
+
+            CreateMap<CreateAuthorDtoModel, Author>();
         }
     }
 }
