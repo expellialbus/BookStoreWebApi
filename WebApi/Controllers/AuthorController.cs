@@ -60,9 +60,15 @@ namespace WebApi.Controllers
             // Creates an instance of CreateAuthorCommand class and returns author specified by id
             // Returns 200 OK if the author successfully added to the database
             CreateAuthorCommand command = new CreateAuthorCommand(_context, _mapper);
-
+            CreateAuthorCommandValidator validator = new CreateAuthorCommandValidator();
+            
             command.Model = model;
             
+            // Tries to validate CreateAuthorCommand class properties
+            // according to rules provided in CreateAuthorCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             command.Handle();
 
             return Ok();
