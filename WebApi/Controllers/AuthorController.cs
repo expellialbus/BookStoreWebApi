@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
@@ -37,8 +38,15 @@ namespace WebApi.Controllers
             // Creates an instance of GetAuthorDetailQuery class and returns author specified by id
             // Returns 200 OK if there is the specified author in the authors table
             GetAuthorDetailQuery query = new GetAuthorDetailQuery(_context, _mapper);
-
+            GetAuthorDetailQueryValidator validator = new GetAuthorDetailQueryValidator();
+            
             query.AuthorId = id;
+            
+            // Tries to validate GetAuthorDetailQuery class properties
+            // according to rules provided in GetAuthorDetailQueryValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(query);
             
             var result = query.Handle();
 
