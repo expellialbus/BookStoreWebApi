@@ -1,4 +1,5 @@
 using AutoMapper;
+using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
 using WebApi.Applications.BookOperations.Commands.CreateBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
@@ -11,9 +12,10 @@ namespace WebApi.Common
         public MappingProfile()
         {
             Book();
+            Author();
         }
         
-        // Maps Book objects to BookViewModel according to specified rules
+        // Does map operations for Book entity
         private void Book()
         {
             CreateMap<Book, BookViewModel>()
@@ -33,6 +35,14 @@ namespace WebApi.Common
                     options => options.MapFrom(book => book.PublishDate.ToString("dd/MM/yyyy")));
 
             CreateMap<CreateBookDtoModel, Book>();
+        }
+
+        // Does map operations for Author entity
+        private void Author()
+        {
+            CreateMap<Author, AuthorViewModel>()
+                .ForMember(model => model.BirthDate, // Maps Author.BirthDate to BirthDate property of AuthorViewModel
+                    options => options.MapFrom(author => author.BirthDate.ToString("dd/MM/yyyy")));
         }
     }
 }
