@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Applications.AuthorOperations.Commands.CreateAuthor;
+using WebApi.Applications.AuthorOperations.Commands.UpdateAuthor;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
 using WebApi.DbOperations;
@@ -57,7 +58,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] CreateAuthorDtoModel model)
         {
-            // Creates an instance of CreateAuthorCommand class and returns author specified by id
+            // Creates an instance of CreateAuthorCommand class and adds new author to the database
             // Returns 200 OK if the author successfully added to the database
             CreateAuthorCommand command = new CreateAuthorCommand(_context, _mapper);
             CreateAuthorCommandValidator validator = new CreateAuthorCommandValidator();
@@ -69,6 +70,21 @@ namespace WebApi.Controllers
             // If properties are not consistent with the rules 
             // an error will be thrown
             validator.ValidateAndThrow(command);
+            command.Handle();
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] UpdateAuthorDtoModel model, int id)
+        {
+            // Creates an instance of UpdateAuthorCommand class and updates author specified by id
+            // Returns 200 OK if the author successfully updated
+            UpdateAuthorCommand command = new UpdateAuthorCommand(_context);
+
+            command.AuthorId = id;
+            command.Model = model;
+            
             command.Handle();
 
             return Ok();
