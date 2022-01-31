@@ -14,7 +14,7 @@ namespace UnitTests.Applications.BookOperations.Queries.GetBookDetail
             GetBookDetailQuery query = new GetBookDetailQuery(null, null);
             GetBookDetailQueryValidator validator = new GetBookDetailQueryValidator();
 
-            query.BookId = 5; // it does not matter the book with provided is in database
+            query.BookId = 5; // it does not matter the book with provided id is in database
 
             var result = validator.Validate(query);
 
@@ -29,7 +29,7 @@ namespace UnitTests.Applications.BookOperations.Queries.GetBookDetail
             GetBookDetailQuery query = new GetBookDetailQuery(null, null);
             GetBookDetailQueryValidator validator = new GetBookDetailQueryValidator();
 
-            query.BookId = 0; // it does not matter the book with provided is in database
+            query.BookId = 0; // it does not matter the book with provided id in database
 
             var result = validator.Validate(query);
 

@@ -14,7 +14,7 @@ namespace UnitTests.Applications.AuthorOperations.Queries.GetAuthorDetail
             GetAuthorDetailQuery query = new GetAuthorDetailQuery(null, null);
             GetAuthorDetailQueryValidator validator = new GetAuthorDetailQueryValidator();
 
-            query.AuthorId = 5; // it does not matter the author with provided is in database
+            query.AuthorId = 5; // it does not matter the author with provided id in database
 
             var result = validator.Validate(query);
 

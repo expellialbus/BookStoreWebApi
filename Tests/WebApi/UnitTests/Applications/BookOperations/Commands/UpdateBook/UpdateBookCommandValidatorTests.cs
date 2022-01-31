@@ -15,7 +15,7 @@ namespace UnitTests.Applications.BookOperations.Commands.UpdateBook
             UpdateBookCommand command = new UpdateBookCommand(null);
             UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
 
-            command.BookId = 5; // it does not matter the book with provided is in database
+            command.BookId = 5; // it does not matter the book with provided id in database
             command.Model = new UpdateBookDtoModel
             {
                 // No rule for Title
