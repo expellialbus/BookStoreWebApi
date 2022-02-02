@@ -103,9 +103,15 @@ namespace WebApi.Controllers
             // Creates an instance of DeleteAuthorCommand class and deleted author specified by id
             // Returns 200 OK if the author successfully deleted
             DeleteAuthorCommand command = new DeleteAuthorCommand(_context);
-
+            DeleteAuthorCommandValidator validator = new DeleteAuthorCommandValidator();
+            
             command.AuthorId = id;
             
+            // Tries to validate DeleteAuthorCommand class properties
+            // according to rules provided in DeleteAuthorCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             command.Handle();
 
             return Ok();
