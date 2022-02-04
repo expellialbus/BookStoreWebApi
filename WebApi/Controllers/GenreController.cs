@@ -30,5 +30,19 @@ namespace WebApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            // Creates and instance of GetGenreDetailQuery and returns genre specified by id 
+            // Returns 200 OK if there is the specified genre in the genres table
+            GetGenreDetailQuery query = new GetGenreDetailQuery(_context, _mapper);
+
+            query.GenreId = id;
+
+            var result = query.Handle();
+
+            return Ok(result);
+        }
     }
 }
