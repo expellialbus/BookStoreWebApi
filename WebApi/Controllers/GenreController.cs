@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Applications.GenreOperations.Queries.GetGenreDetail;
 using WebApi.Applications.GenreOperations.Queries.GetGenres;
@@ -37,9 +38,16 @@ namespace WebApi.Controllers
             // Creates and instance of GetGenreDetailQuery and returns genre specified by id 
             // Returns 200 OK if there is the specified genre in the genres table
             GetGenreDetailQuery query = new GetGenreDetailQuery(_context, _mapper);
-
+            GetGenreDetailQueryValidator validator = new GetGenreDetailQueryValidator();
+            
             query.GenreId = id;
 
+            // Tries to validate GetGenreDetailQuery class properties
+            // according to rules provided in GetGenreDetailQueryValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(query);
+            
             var result = query.Handle();
 
             return Ok(result);
