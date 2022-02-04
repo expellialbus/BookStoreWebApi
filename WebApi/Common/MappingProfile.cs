@@ -5,6 +5,7 @@ using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
 using WebApi.Applications.BookOperations.Commands.CreateBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
+using WebApi.Applications.GenreOperations.Queries.GetGenreDetail;
 using WebApi.Applications.GenreOperations.Queries.GetGenres;
 using WebApi.Entities;
 
@@ -59,6 +60,7 @@ namespace WebApi.Common
         private void Genre()
         {
             CreateMap<Genre, GenreViewModel>();
+            CreateMap<Genre, GenreDetailViewModel>();
         }
     }
 }
