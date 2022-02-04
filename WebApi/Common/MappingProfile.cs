@@ -5,6 +5,7 @@ using WebApi.Applications.AuthorOperations.Queries.GetAuthors;
 using WebApi.Applications.BookOperations.Commands.CreateBook;
 using WebApi.Applications.BookOperations.Queries.GetBookDetail;
 using WebApi.Applications.BookOperations.Queries.GetBooks;
+using WebApi.Applications.GenreOperations.Queries.GetGenres;
 using WebApi.Entities;
 
 namespace WebApi.Common
@@ -15,6 +16,7 @@ namespace WebApi.Common
         {
             Book();
             Author();
+            Genre();
         }
         
         // Does map operations for Book entity
@@ -51,6 +53,12 @@ namespace WebApi.Common
                     options => options.MapFrom(author => author.BirthDate.ToString("dd/MM/yyyy")));
 
             CreateMap<CreateAuthorDtoModel, Author>();
+        }
+        
+        // Does map operations for Genre entity
+        private void Genre()
+        {
+            CreateMap<Genre, GenreViewModel>();
         }
     }
 }
