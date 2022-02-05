@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Applications.GenreOperations.Commands.CreateGenre;
 using WebApi.Applications.GenreOperations.Queries.GetGenreDetail;
 using WebApi.Applications.GenreOperations.Queries.GetGenres;
 using WebApi.DbOperations;
@@ -51,6 +52,20 @@ namespace WebApi.Controllers
             var result = query.Handle();
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateGenreDtoModel model)
+        {
+            // Creates and instance of CreateGenreCommand and adds new genre to the database
+            // Returns 200 OK if the genre is successfully added to the database
+            CreateGenreCommand command = new CreateGenreCommand(_context, _mapper);
+
+            command.Model = model;
+            
+            command.Handle();
+
+            return Ok();
         }
     }
 }
