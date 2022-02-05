@@ -81,9 +81,15 @@ namespace WebApi.Controllers
             // Creates and instance of DeleteGenreCommand and deletes the specified by id
             // Returns 200 OK if the genre is successfully deleted from database   
             DeleteGenreCommand command = new DeleteGenreCommand(_context);
+            DeleteGenreCommandValidator validator = new DeleteGenreCommandValidator();
 
             command.GenreId = id;
-            
+
+            // Tries to validate DeleteGenreCommand class properties
+            // according to rules provided in DeleteGenreCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             command.Handle();
 
             return Ok();
