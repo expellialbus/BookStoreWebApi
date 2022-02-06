@@ -42,7 +42,7 @@ namespace WebApi.Controllers
             // Returns 200 OK if there is the specified genre in the genres table
             GetGenreDetailQuery query = new GetGenreDetailQuery(_context, _mapper);
             GetGenreDetailQueryValidator validator = new GetGenreDetailQueryValidator();
-            
+
             query.GenreId = id;
 
             // Tries to validate GetGenreDetailQuery class properties
@@ -50,7 +50,7 @@ namespace WebApi.Controllers
             // If properties are not consistent with the rules 
             // an error will be thrown
             validator.ValidateAndThrow(query);
-            
+
             var result = query.Handle();
 
             return Ok(result);
@@ -63,9 +63,9 @@ namespace WebApi.Controllers
             // Returns 200 OK if the genre is successfully added to the database
             CreateGenreCommand command = new CreateGenreCommand(_context, _mapper);
             CreateGenreCommandValidator validator = new CreateGenreCommandValidator();
-            
+
             command.Model = model;
-            
+
             // Tries to validate CreateGenreCommand class properties
             // according to rules provided in CreateGenreCommandValidator class constructor
             // If properties are not consistent with the rules 
@@ -80,10 +80,16 @@ namespace WebApi.Controllers
         public IActionResult Update([FromBody] UpdateGenreDtoModel model, int id)
         {
             UpdateGenreCommand command = new UpdateGenreCommand(_context);
+            UpdateGenreCommandValidator validator = new UpdateGenreCommandValidator();
 
             command.GenreId = id;
             command.Model = model;
-            
+
+            // Tries to validate UpdateGenreCommand class properties
+            // according to rules provided in UpdateGenreCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             command.Handle();
 
             return Ok();
