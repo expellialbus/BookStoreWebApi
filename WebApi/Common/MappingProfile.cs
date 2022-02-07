@@ -8,6 +8,7 @@ using WebApi.Applications.BookOperations.Queries.GetBooks;
 using WebApi.Applications.GenreOperations.Commands.CreateGenre;
 using WebApi.Applications.GenreOperations.Queries.GetGenreDetail;
 using WebApi.Applications.GenreOperations.Queries.GetGenres;
+using WebApi.Applications.UserOperations.Commands;
 using WebApi.Entities;
 
 namespace WebApi.Common
@@ -19,6 +20,7 @@ namespace WebApi.Common
             Book();
             Author();
             Genre();
+            User();
         }
         
         // Does map operations for Book entity
@@ -63,6 +65,12 @@ namespace WebApi.Common
             CreateMap<Genre, GenreViewModel>();
             CreateMap<Genre, GenreDetailViewModel>();
             CreateMap<CreateGenreDtoModel, Genre>();
+        }
+        
+        // Does map operations for User entity
+        private void User()
+        {
+            CreateMap<CreateUserDtoModel, User>();
         }
     }
 }
