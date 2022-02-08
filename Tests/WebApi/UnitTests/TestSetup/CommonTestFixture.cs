@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebApi.Common;
 using WebApi.DbOperations;
 
@@ -9,6 +10,7 @@ namespace UnitTests.TestSetup
     {
         public IBookStoreDbContext Context { get; set; }
         public IMapper Mapper { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         public CommonTestFixture()
         {
@@ -34,6 +36,9 @@ namespace UnitTests.TestSetup
             
             // Creates a mapper object with the configurations of MappingProfile class
             Mapper = new MapperConfiguration(expression => expression.AddProfile<MappingProfile>()).CreateMapper();
+
+            // Creates a new configuration
+            Configuration = new TokenConfiguration();
         }
     }
 }
