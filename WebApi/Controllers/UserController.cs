@@ -46,10 +46,18 @@ namespace WebApi.Controllers
         [HttpPost("connect/token")]
         public IActionResult CreateToken([FromBody] CreateTokenDtoModel model)
         {
+            // Creates and instance of CreateTokenCommand and creates new token
+            // Returns 200 OK if the token is successfully created
             CreateTokenCommand command = new CreateTokenCommand(_configuration, _context);
-
+            CreateTokenCommandValidator validator = new CreateTokenCommandValidator();
+            
             command.Model = model;
-
+            
+            // Tries to validate CreateTokenCommand class properties
+            // according to rules provided in CreateTokenCommandValidator class constructor
+            // If properties are not consistent with the rules 
+            // an error will be thrown
+            validator.ValidateAndThrow(command);
             var token = command.Handle();
 
             return Ok(token);
