@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using FluentAssertions;
 using UnitTests.TestSetup;
-using WebApi.Applications.UserOperations.Commands;
+using WebApi.Applications.UserOperations.Commands.CreateUser;
 using WebApi.DbOperations;
 using WebApi.Entities;
 using Xunit;

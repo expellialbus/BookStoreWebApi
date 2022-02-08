@@ -1,5 +1,5 @@
 using FluentAssertions;
-using WebApi.Applications.UserOperations.Commands;
+using WebApi.Applications.UserOperations.Commands.CreateUser;
 using Xunit;
 
 namespace UnitTests.Applications.UserOperations.Commands.CreateUser

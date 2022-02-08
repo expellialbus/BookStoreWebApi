@@ -2,7 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using WebApi.Applications.UserOperations.Commands;
+using WebApi.Applications.UserOperations.Commands.CreateUser;
 using WebApi.DbOperations;
 
 namespace WebApi.Controllers
