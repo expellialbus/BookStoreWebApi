@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using WebApi.Applications.UserOperations.Commands.CreateToken;
 using WebApi.Applications.UserOperations.Commands.CreateUser;
 using WebApi.DbOperations;
 
@@ -13,7 +14,7 @@ namespace WebApi.Controllers
     {
         private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public UserController(IBookStoreDbContext context, IMapper mapper, IConfiguration configuration)
         {
@@ -40,6 +41,18 @@ namespace WebApi.Controllers
             command.Handle();
 
             return Ok();
+        }
+
+        [HttpPost("connect/token")]
+        public IActionResult CreateToken([FromBody] CreateTokenDtoModel model)
+        {
+            CreateTokenCommand command = new CreateTokenCommand(_configuration, _context);
+
+            command.Model = model;
+
+            var token = command.Handle();
+
+            return Ok(token);
         }
     }
 }
